@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+type AppProps = {
+    initPotions?: string[];
+}
+
+function App(props: AppProps) {
+    const { initPotions = [] } = props;
+
     const [inputText, setInputText] = useState('');
-    const [potions, setPotions] = useState(['Оборотное зелье']);
+    const [potions, setPotions] = useState(initPotions);
 
     const onAdd = () => {
         setPotions([...potions, inputText]);
@@ -21,17 +27,20 @@ function App() {
         <div className="App">
             <h1>Список зелий:</h1>
             <div>
-                {potions.map((potion, index) => {
+                {potions.map((potionName, index) => {
                     return (
-                        <div className="Row">
-                            <div className="Row-Name">{potion}</div>
+                        <div
+                            key={potionName}
+                            className="Row"
+                        >
+                            <div className="Row-Name">{potionName}</div>
                             <button className="Row-Remove" onClick={() => onRemove(index)}>x</button>
                         </div>
                     )
                 })}
             </div>
             <div className="Action">
-                <input value={inputText} onChange={(e) => setInputText(e.target.value)}/>
+                <input className="Input" value={inputText} onChange={(e) => setInputText(e.target.value)}/>
                 <button className="Add" onClick={onAdd}>добавить</button>
             </div>
         </div>
