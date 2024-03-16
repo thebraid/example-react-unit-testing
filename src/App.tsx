@@ -19,7 +19,7 @@ function App(props: AppProps) {
     const onRemove = (index: number) => {
         setPotions([
             ...potions.slice(0, index),
-            ...potions.slice(index+1),
+            ...potions.slice(index + 1),
         ]);
     };
 
