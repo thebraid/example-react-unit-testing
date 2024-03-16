@@ -2,6 +2,8 @@
   "name": "example-react-unit-testing",
   "version": "0.1.0",
   "private": true,
+  "author": "Klester Alexey",
+  "license": "ISC",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

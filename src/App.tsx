@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [inputText, setInputText] = useState('');
+    const [potions, setPotions] = useState(['Оборотное зелье']);
+
+    const onAdd = () => {
+        setPotions([...potions, inputText]);
+        setInputText('');
+    };
+
+    const onRemove = (index: number) => {
+        setPotions([
+            ...potions.slice(0, index),
+            ...potions.slice(index+1),
+        ]);
+    };
+
+    return (
+        <div className="App">
+            <h1>Список зелий:</h1>
+            <div>
+                {potions.map((potion, index) => {
+                    return (
+                        <div className="Row">
+                            <div className="Row-Name">{potion}</div>
+                            <button className="Row-Remove" onClick={() => onRemove(index)}>x</button>
+                        </div>
+                    )
+                })}
+            </div>
+            <div className="Action">
+                <input value={inputText} onChange={(e) => setInputText(e.target.value)}/>
+                <button className="Add" onClick={onAdd}>добавить</button>
+            </div>
+        </div>
+    );
 }
 
 export default App;
